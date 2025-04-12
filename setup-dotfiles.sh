@@ -32,6 +32,7 @@ if [ $? -eq 0 ]; then
   ln -s ./rofi ~/.config/rofi
   ln -s ./tmux/.tmux.conf ~/.tmux.conf
   ln -s ./tmux ~/.tmux
+  ln -s ./local/bin/scripts ~/.local/bin/scripts
 else
   echo "Failed to clone the repository"
   exit 1
