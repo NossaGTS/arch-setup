@@ -22,15 +22,16 @@ fi
 
 if [ $? -eq 0 ]; then
   cd "$REPO_NAME" || exit
-  cp -r ./zsh/.zshrc ~/.zshrc
-  cp -r ./zsh/.oh-my-zsh ~/.oh-my-zsh/
-  cp -r ./ghostty ~/.config/ghostty
-  cp -r ./nvim ~/.config/nvim
-  cp -r ./i3 ~/.config/i3
-  cp -r ./polybar ~/.config/polybar
-  cp -r ./rofi ~/.config/rofi
-  cp ./tmux/.tmux.conf ~/.tmux.conf
-  cp -r ./tmux ~/.tmux
+  echo "linking config files"
+  ln -s ./zsh/.zshrc ~/.zshrc
+  ln -s ./zsh/.oh-my-zsh ~/.oh-my-zsh/
+  ln -s ./ghostty ~/.config/ghostty
+  ln -s ./nvim ~/.config/nvim
+  ln -s ./i3 ~/.config/i3
+  ln -s ./polybar ~/.config/polybar
+  ln -s ./rofi ~/.config/rofi
+  ln -s ./tmux/.tmux.conf ~/.tmux.conf
+  ln -s ./tmux ~/.tmux
 else
   echo "Failed to clone the repository"
   exit 1

@@ -21,7 +21,7 @@ install_yay() {
 
 install_packages() {
   local packages=("$@")
-  for package in "${packages[$@]}"; do
+  for package in ${packages[$@]}; do
     if ! pacman -Qs | grep -q "$package"; then
       echo "Installing $package..."
       sudo pacman -S "$package" --noconfirm
@@ -33,7 +33,7 @@ install_packages() {
 
 install_yay_packages() {
   local packages=("$@")
-  for package in {packages[$@]}; do
+  for package in ${packages[$@]}; do
     if ! pacman -Qs | grep -q "$package"; then
       echo "installing package"
       sudo yay "$package" --noconfirm
@@ -53,30 +53,30 @@ configure_system() {
   echo "LANG=en_US.UTF-8" | sudo tee -a /etc/locale.conf
 
   #configure hostname
-  read -p "Enter your hostname: " hostname
-  echo $hostname | sudo tee -a /etc/hostname
+  read -p -r "Enter your hostname: " hostname
+  echo "$hostname" | sudo tee -a /etc/hostname
 
   #install xorg
   sudo pacman -S xorg-server xorg-xinit xorg-xsetroot xorg-xrandr xorg-xset xorg-xkill --noconfirm
 
   #install graphics drivers
-  read -p "which type of graphics card do you have nvidia or amd? " graphicscard
-  if [[ $graphicscard -eq "nvidia" ]]; then
+  read -p -r "which type of graphics card do you have nvidia or amd? " graphicscard
+  if [[ $graphicscard = "nvidia" ]]; then
     echo "Installing nvidia drivers"
-    read -p "Do you wan't opensource or proprietary drivers? " driver
-    if [[ $driver -eq "proprietary" ]]; then
+    read -p -r "Do you wan't opensource or proprietary drivers? " driver
+    if [[ $driver = "proprietary" ]]; then
       sudo pacman -S nvidia nvidia-utils nvidia-settings --noconfirm
-    elif [[ $driver -eq "opensource" ]]; then
+    elif [[ $driver = "opensource" ]]; then
       sudo pacman -S nouveau --noconfirm
     else
       echo "Invalid input"
     fi
-  elif [[ $graphicscard -eq "amd" ]]; then
+  elif [[ $graphicscard = "amd" ]]; then
     echo "Installing AMD drivers"
-    read -p "Do you wan't opensource or proprietary drivers? " driver
-    if [[ $driver -eq "proprietary" ]]; then
+    read -p -r "Do you wan't opensource or proprietary drivers? " driver
+    if [[ $driver = "proprietary" ]]; then
       sudo pacman -S amdgpu-pro --noconfirm
-    elif [[ $driver -eq "opensource" ]]; then
+    elif [[ $driver = "opensource" ]]; then
       sudo pacman -S amdgpu --noconfirm
     else
       echo "Invalid input"
