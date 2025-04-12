@@ -36,7 +36,7 @@ install_yay_packages() {
   for package in {packages[$@]}; do
     if ! pacman -Qs | grep -q "$package"; then
       echo "installing package"
-      sudo pacman -S "$package" --noconfirm
+      sudo yay "$package" --noconfirm
     else
       echo "$package is already installed."
     fi
